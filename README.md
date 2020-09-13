@@ -1,6 +1,8 @@
 # API Project: Request Header Parser Microservice for freeCodeCamp
 
-[![Run on Repl.it](https://repl.it/badge/github/freeCodeCamp/boilerplate-project-headerparser)](https://repl.it/github/freeCodeCamp/boilerplate-project-headerparser)
+[See and Run on Repl.it](https://project-headerparser.mennovanbalen.repl.co)
+
+[Run it](https://project-headerparser.mennovanbalen.repl.co)
 
 ### User stories:
 
