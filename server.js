@@ -1,6 +1,10 @@
 // server.js
 // where your node app starts
 
+// init networkInerfaces
+const { networkInterfaces } = require("os");
+const nets = networkInterfaces();
+
 // init project
 var express = require("express");
 var app = express();
@@ -23,13 +27,34 @@ app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
 });
 
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log("Your app is listening on port " + listener.address().port);
+// Who Am I API
+const ip = () => {
+  for (name of Object.keys(nets)) {
+    for (net of nets[name]) {
+      if (!net.internal && net.family === "IPv4") {
+        return net.address;
+      }
+    }
+  }
+};
+
+app.get("/api/whoami", function (req, res) {
+  const language = req.header("Accept-Language");
+  const software = req.header("User-Agent");
+  res.json({
+    ip: ip(),
+    language,
+    software,
+  });
 });
 
-// in dev:
-// const port = 5000;
-// var listener = app.listen(port, function () {
+// listen for requests :)
+// var listener = app.listen(process.env.PORT, function () {
 //   console.log("Your app is listening on port " + listener.address().port);
 // });
+
+// in dev:
+const port = 5000;
+var listener = app.listen(port, function () {
+  console.log("Your app is listening on port " + listener.address().port);
+});
