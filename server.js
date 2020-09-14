@@ -28,6 +28,7 @@ app.get("/api/hello", function (req, res) {
 });
 
 // Who Am I API
+// get ip callback function for use with node.js
 const ip = () => {
   for (name of Object.keys(nets)) {
     for (net of nets[name]) {
@@ -39,10 +40,16 @@ const ip = () => {
 };
 
 app.get("/api/whoami", function (req, res) {
+  // get language, software and ip with express.js:
   const language = req.header("Accept-Language");
   const software = req.header("User-Agent");
+  // const ipaddress = req.ip
+
+  // get ip with node:
+  const ipaddress = ip();
+
   res.json({
-    ipaddress: ip(),
+    ipaddress,
     language,
     software,
   });
